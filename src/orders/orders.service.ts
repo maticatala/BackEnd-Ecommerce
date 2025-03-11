@@ -115,9 +115,12 @@ export class OrdersService {
 
     if (payment.order) {
       payment.order.updatedBy = currentUser;
-      if (payment.status !== 'approved' && payment.status !== 'pending') {
+      
+      const validStatuses = ['approved', 'pending', 'completed', 'in_process'];
+      if (!validStatuses.includes(payment.status)) {
         payment.order.status = OrderStatus.CANCELLED;
       }
+      
       await this.orderRepository.save(payment.order);
     }
 
