@@ -62,7 +62,7 @@ export class ReportsService {
       startDate = new Date(2010, 0, 1);
     }
 
-    // Total ingresos (contando sin pagar y pagados y entregados o en proceso de envío)
+    // Pedidos para el total de ingresos (contando sin pagar y pagados y entregados o en proceso de envío)
     const totalOrders: Order[] = await this.ordersRepository.find({
       where: {
         orderAt: Between(startDate, endDate),
@@ -72,7 +72,7 @@ export class ReportsService {
       relations: ['products', 'payments'],
     });
 
-    // ingresos confirmados con entrega completada y pago completado
+    // Pedidos para los ingresos confirmados con entrega completada y pago completado
     const deliveredOrders: Order[] = await this.ordersRepository.find({
       where: {
         orderAt: Between(startDate, endDate),
@@ -82,7 +82,7 @@ export class ReportsService {
       relations: ['products', 'payments'] 
     });
     
-    // Ingresos con pago completado y sin entregar
+    // Pedidos para los ingresos con pago completado y sin entregar
     const pendingDeliveryOrders:Order[] = await this.ordersRepository.find({
       where: {
         orderAt: Between(startDate, endDate),
@@ -92,6 +92,7 @@ export class ReportsService {
       relations: ['products', 'payments']
     });
 
+    // Pedidos para los ingresos a cobrar
     const expectedOrders: Order[] = await this.ordersRepository.find({
       where: {
         orderAt: Between(startDate, endDate),

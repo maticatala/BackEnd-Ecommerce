@@ -35,7 +35,7 @@ export class CategoriesController {
     return this.categoryService.findOne(+id)
   }
 
-  @Get("file/get") // error al hacerlo como en productos (ver y unificar). Toma "getfile" como id y ejecuta la peticion get anterior
+  @Get("file/get") //nueva implementacion
   getFile(@Res() res: Response, @Query('fileName') fileName: string) {
     res.sendFile(path.join(__dirname, "../../../uploads/" + fileName));
   }

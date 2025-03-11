@@ -26,7 +26,7 @@ export class ReportsController {
   //   return this.reportsService.getTopProducts(limit);
   // }
 
-  @Get('popular-categories')
+  @Get('popular-categories') // para la home page
   async getPopularCategories(@Query('limit') limit: number = 5) {
     return this.reportsService.getPopularCategories(limit);
   }
